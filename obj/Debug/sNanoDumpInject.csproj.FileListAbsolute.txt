@@ -1,0 +1,6 @@
+C:\dev\sNanoDumpInject\obj\Debug\sNanoDumpInject.csproj.AssemblyReference.cache
+C:\dev\sNanoDumpInject\obj\Debug\sNanoDumpInject.csproj.CoreCompileInputs.cache
+C:\dev\sNanoDumpInject\bin\Debug\sNanoDumpInject.dll
+C:\dev\sNanoDumpInject\bin\Debug\sNanoDumpInject.pdb
+C:\dev\sNanoDumpInject\obj\Debug\sNanoDumpInject.dll
+C:\dev\sNanoDumpInject\obj\Debug\sNanoDumpInject.pdb
