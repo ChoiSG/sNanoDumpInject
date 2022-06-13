@@ -231,7 +231,7 @@ namespace sNanoDumpInject
 
             bool patched = mc.PatchExit();
             Console.WriteLine("\r\n[+] Exit functions patched: " + patched + "\r\n");
-            Console.WriteLine(@"[+] Dumping the thing to: C:\windows\temp\trash.evtx");
+            Console.WriteLine(@"[+] Dumping the thing to: C:\windows\temp\appevtlog.evtx");
             Console.WriteLine("\r\n=========================");
 
             // NtCreateThreadEx 
@@ -267,7 +267,11 @@ namespace sNanoDumpInject
 
             if (File.Exists(@"C:\windows\temp\appevtlog.evtx"))
             {
-                Console.WriteLine("\r\nDumpfile successfully created!\r\n");
+                Console.WriteLine("Dumpfile successfully created!");
+            }
+            else
+            {
+                Console.Write("[-] Dumpfile cannot be found.");
             }
 
             Console.WriteLine("[!] If you run this again, the current process will crash. Open up another shell/beacon if you want to run again.\r\n");
